@@ -1,15 +1,15 @@
 # get input from de user
 b = 0
+sides = []
 
-while b != 3:
-    sides = input("give me the side of your triangle: ")
+while b < 3:
+    side = input(f"Give me the side {b +1}: ")
     
-    if sides.isnumeric():
-        print("hello world")
+    try:
+        side = float(side)
+        sides.append(side)
         b += 1
-    else:
-        print("Eso no es un numero")
-
-
-
+        print("aña")
+    except ValueError:
+        print("Please enter a number")
 
