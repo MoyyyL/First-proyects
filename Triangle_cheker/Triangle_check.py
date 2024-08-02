@@ -9,7 +9,6 @@ while b < 3:
         side = float(side)
         sides.append(side)
         b += 1
-        print("aña")
     except ValueError:
         print("Please enter a number")
 
