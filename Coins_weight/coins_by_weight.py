@@ -1,24 +1,12 @@
 import math
 from data import *
-import modules_CW
+from modules_CW import check_zone, Amount_of, calc_dollar
 
 # get input
-i = 0
-while i < len(coins):
-    try:
-        how_many = int()
-        weight.append(how_many)
-        i += 1
-    except:
-        print("i asked for a number")
+check_zone()
 
 # work the input
-
-for i in range(len(weight)):
-    coin_count = round(weight[i] / coins[i].weight)
-    wrappers = math.ceil(coin_count / coins[i].wrapper)
-    
-    amount_of_coins.append(coin_count)
-    amount_of_wrappers.append(wrappers)
+Amount_of()
+dollar = calc_dollar()
 
 # show the things
