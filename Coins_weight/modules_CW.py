@@ -7,13 +7,15 @@ def check_zone():
     i = 0 # como "for i" no se puede reiniciar como en C, usamos while mejor
     while i < len(coins):
         try:
-            # si mete algo que no sea numero esto tira error y ejecuta el except:
             how_many = input(f"Weight of your {coins[i].name}: ")
             how_many = float(how_many)
-            weight.append(how_many)
-            i += 1
+            if how_many > -1:
+                weight.append(how_many)
+                i += 1
+            else:
+                print("positive number")
         except:
-            print("i asked for a number")
+                print("i asked for a number")
 
 # calculando la cantidad de monedas y de envoltorios para cada moneda
 def Amount_of(pound_gram):
