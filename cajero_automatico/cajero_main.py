@@ -13,14 +13,16 @@ if (general_menu == 1): #crear cuenta
     
 elif (general_menu == 2): # iniciar sesion
     
-    if functions.password_verification():
+    Numero_de_cuenta = input("Ingresa tu numero de cuenta: ")
+    
+    if functions.password_verification(Numero_de_cuenta):
         option = functions.account_menu()
         
         if option == 1:
-            print(option)
+            functions.depositar(Numero_de_cuenta)
                 
         elif option == 2:
-            print(option)
+            functions.retirar(Numero_de_cuenta)
             
         elif option == 3:
             print(option)

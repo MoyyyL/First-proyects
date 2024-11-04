@@ -39,7 +39,7 @@ def Crear_cuenta():
                     if len(n_acc) == 8 and n_acc.isdigit():
                         int(n_acc)
         
-                        if data_base.insertRow(username, password, n_acc, balance):
+                        if data_base.insertRow(username, password, abs(n_acc), balance):
                             # se vuelve a intentar el numero de cuenta diferente
                             pass
                         else:
@@ -55,20 +55,20 @@ def Crear_cuenta():
             print("Ingrese un valor apropiado")
 
 
-#todo Opcion 2
+#todo Verificacion (Login)
 
-def password_verification():
+def password_verification(Numero_cuenta):
     print("-------------------")
     try:
-        Numero_cuenta = int(input("Ingrese su numero de cuenta: "))
+        int(Numero_cuenta)
     
-        verificador = data_base.Search(Numero_cuenta)
+        verificador = data_base.get_password(Numero_cuenta)
     
         if verificador:
             password = input("Ingrese la contraseña: ")
 
             if verificador[0] == password:
-                print("Exitoso")
+                print("Ingreso exitoso")
                 return True
             else:
                 print("Contraseña incorrecta, perdedor")            
@@ -78,8 +78,7 @@ def password_verification():
         print("Pon un numero de verdad, perdedor")
 
 
-#todo -------------------
-
+#todo Menu de cuenta ingresada
 
 def account_menu():
     print("-----------------Account menu-----------------------")
@@ -98,3 +97,54 @@ def account_menu():
                 return option
         except ValueError:
             print("Use just numbers beetween in the 1-3 range")
+            
+#todo Depositar dinero
+
+def depositar(n_acc):
+    
+    try:
+        old_balance = data_base.get_balance(n_acc)
+        
+        if old_balance is None:
+            old_balance = 0
+        while (True):      
+            new_balance = int(input("Ingresa la cantidad a depositar: "))
+        
+            if new_balance < 0:
+                print("Ingresa numeros positivos")
+            else:
+                new_balance += int(old_balance[0])
+        
+                data_base.UpdateFields(new_balance, n_acc)
+        
+                print(data_base.get_balance(n_acc))
+                break
+        
+        
+    except ValueError:
+        print("Ingresa numeros gue")
+
+#todo Retirar dinero
+def retirar(n_acc):
+    try:
+        old_balance = data_base.get_balance(n_acc)
+        if old_balance is None:
+            old_balance = 0
+        
+        while (True):
+            new_balance = int(input("Ingresa la cantidad a retirar: "))
+        
+            if new_balance > int(old_balance[0]) and new_balance != 0: 
+                print("No hay suficientes fondos: ")
+            else:
+                old_blc = int(old_balance[0])
+                
+                new_balance = old_blc - abs(new_balance)
+        
+                data_base.UpdateFields(new_balance, n_acc)
+        
+                print(data_base.get_balance(n_acc))
+                break
+            
+    except ValueError:
+        print("Ingresa numeros gue")

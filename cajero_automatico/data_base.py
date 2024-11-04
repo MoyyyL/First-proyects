@@ -39,12 +39,13 @@ def UpdateFields(new_value, id_value):
     cursor = conn.cursor()
     
     # Usando placeholders (?) para evitar inyección SQL
-    instruccion = "UPDATE Accounts_database SET Balance = ? WHERE Data_id = ?"
+    instruccion = "UPDATE Accounts_database SET Balance = ? WHERE NumberAcc = ?"
     cursor.execute(instruccion, (new_value, id_value))
     
     conn.commit()
     conn.close()
 
+#UpdateFields(0, 12345678)
 #! reparacion---------------------------------------
 def deleteRow(id):
     conn = sql.connect("accounts.db")
@@ -68,23 +69,21 @@ def readRows(code):
     conn.commit()
     conn.close()
 
-def get_all_rows():
+def get_balance(n_acc):
     conn = sql.connect("accounts.db")
     cursor = conn.cursor()
     
     
-    instruccion = "SELECT Data_id FROM Accounts_database"
-    cursor.execute(instruccion)
-    datos = cursor.fetchall()
-    
-    datos = [dato[0] for dato in datos]
+    instruccion = "SELECT Balance FROM Accounts_database WHERE NumberAcc = ?"
+    cursor.execute(instruccion, (n_acc,))
+    datos = cursor.fetchone()
     
     conn.commit()
     conn.close()
     return(datos)
 
 
-def Search(n_acc):
+def get_password(n_acc):
     conn = sql.connect("accounts.db")
     cursor = conn.cursor()
     instruccion = f"SELECT Password FROM Accounts_database WHERE NumberAcc= ?"
