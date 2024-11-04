@@ -2,23 +2,38 @@ import sqlite3
 import data_base
 import functions
 
-#! solo de referencia
-account_N = 0
-users_name = ""
-password = []
-
 #* Menu 
 general_menu = functions.menu()
 
-#? Pruebas data_base
-
+#!data_base.open_create()
 
 
 if (general_menu == 1): #crear cuenta
     functions.Crear_cuenta()
     
 elif (general_menu == 2): # iniciar sesion
-    print(2)
+    
+    if functions.password_verification():
+        option = functions.account_menu()
+        
+        if option == 1:
+            print(option)
+                
+        elif option == 2:
+            print(option)
+            
+        elif option == 3:
+            print(option)
+        
+        elif option == 4:
+            print(option)
+        
+        elif option == 5:
+            print(option)
+        
+        else:
+            print("Alaberga que paso :VvVvVVvV")
+    
     
 elif (general_menu == 3): # salir
     pass

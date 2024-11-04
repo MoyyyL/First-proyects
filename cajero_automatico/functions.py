@@ -1,6 +1,7 @@
 import data_base
 import random
 
+#todo Menu principal
 def menu():
     print("--------------select an option-----------------")
     print("1. Crear cuenta")
@@ -18,7 +19,7 @@ def menu():
         except ValueError:
             print("Use just numbers beetween in the 1-3 range")
 
-#? Opcion 1
+#todo Opcion 1
 
 def Crear_cuenta():
     
@@ -54,8 +55,30 @@ def Crear_cuenta():
             print("Ingrese un valor apropiado")
 
 
+#todo Opcion 2
 
-#?-------------------
+def password_verification():
+    print("-------------------")
+    try:
+        Numero_cuenta = int(input("Ingrese su numero de cuenta: "))
+    
+        verificador = data_base.Search(Numero_cuenta)
+    
+        if verificador:
+            password = input("Ingrese la contraseña: ")
+
+            if verificador[0] == password:
+                print("Exitoso")
+                return True
+            else:
+                print("Contraseña incorrecta, perdedor")            
+        else:
+            print("no existe, perdedor")
+    except ValueError:
+        print("Pon un numero de verdad, perdedor")
+
+
+#todo -------------------
 
 
 def account_menu():
@@ -68,7 +91,7 @@ def account_menu():
     
     while(True):
         try:
-            option = int(input())
+            option = int(input("Select an option: "))
             if option < 1 or option > 5:
                 print("Select an option from the menu")
             else:

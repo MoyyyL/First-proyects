@@ -84,24 +84,14 @@ def get_all_rows():
     return(datos)
 
 
-
-
-
-
-
-
-
-
-
-def Search():
-    conn = sql.connect("password_manager.db")
+def Search(n_acc):
+    conn = sql.connect("accounts.db")
     cursor = conn.cursor()
-    instruccion = f"SELECT * FROM Password_database WHERE name='ibai'"
-    cursor.execute(instruccion)
-    datos = cursor.fetchall()
+    instruccion = f"SELECT Password FROM Accounts_database WHERE NumberAcc= ?"
+    cursor.execute(instruccion, (n_acc,))
+    datos = cursor.fetchone()
     
-    conn.commit()
     conn.close()
-    print(datos)
+    return(datos)
 
 
